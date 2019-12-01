@@ -29,12 +29,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _timeString;
-
   @override
   void initState() {
-    _timeString = _formatDateTime(DateTime.now());
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => setState(() {}));
     super.initState();
   }
 
@@ -47,18 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: HomeWidget(),
     );
   }
-
-  void _getTime() {
-    final DateTime now = DateTime.now();
-    final String formattedDateTime = _formatDateTime(now);
-    setState(() {
-      _timeString = formattedDateTime;
-    });
-  }
-
-  String _formatDateTime(DateTime dateTime) {
-    return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
-  }
 }
 
 class HomeWidget extends StatelessWidget {
@@ -66,7 +51,6 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CustomPaint(
-        //                       <-- CustomPaint widget
         size: Size(300, 300),
         painter: MyPainter(),
       ),
@@ -75,7 +59,6 @@ class HomeWidget extends StatelessWidget {
 }
 
 class MyPainter extends CustomPainter {
-  //         <-- CustomPainter class
   var now = new DateTime.now();
 
   @override
